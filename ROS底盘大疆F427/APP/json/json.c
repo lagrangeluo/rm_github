@@ -134,6 +134,8 @@ uint8_t flag_command_recieved = 0;
 uint8_t flag_command_recieved1 = 0;
 uint8_t flag_command_recieved2 = 0;
 uint8_t flag_command_recieved3 = 0;
+uint8_t flag_command_recieved4 = 0;
+uint8_t flag_command_recieved5 = 0;
 
 //解析接收到的底盘速度控制指令
 void resolve_json_chassis_command(void)

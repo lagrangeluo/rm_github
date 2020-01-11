@@ -15,3 +15,4 @@
 ..\output\motor.o: ..\APP\angle_pid\angle_pid.h
 ..\output\motor.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
 ..\output\motor.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+..\output\motor.o: ..\APP\kinematic\kinematic.h

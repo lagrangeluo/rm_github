@@ -16,6 +16,7 @@
 ..\output\tim3_events.o: ..\BSP\usart\bsp_debug_usart.h
 ..\output\tim3_events.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\tim3_events.o: ..\BSP\usart\bsp_uart7.h
+..\output\tim3_events.o: ..\Hardware\fric\fric.h
 ..\output\tim3_events.o: ..\Hardware\motor\motor.h
 ..\output\tim3_events.o: ..\APP\kinematic\kinematic.h
 ..\output\tim3_events.o: ..\Hardware\remote_code\remote_code.h

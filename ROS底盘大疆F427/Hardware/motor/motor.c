@@ -5,6 +5,7 @@
 #include "angle_pid.h"
 #include "stm32f4xx_can.h"
 #include "stm32f4xx.h"
+#include "kinematic.h"
 
 MOTOR_t motor1,motor2,motor3,motor4,motor5,motor6,motor7,motor8;
 LOOPBACK loopback;
@@ -111,7 +112,7 @@ void set_trigger_current()
 	u8 current_msg[8];
 	
 	//电机目标电流为速度pid输出
-	motor5.target_current = motor5.vpid.PID_OUT;//测试
+	motor5.target_current = motor5.target_speed;;//测试
 	motor6.target_current = motor6.vpid.PID_OUT;
 	motor7.target_current = motor7.vpid.PID_OUT;
 	motor8.target_current = motor8.vpid.PID_OUT;
@@ -177,6 +178,8 @@ void stop_trigger_motor()
 motor5.stop_angle = motor5.total_angle;
 	
 set_trigger_motor_angle(motor5.stop_angle);
+trigger_to_motor(0);
+set_trigger_motor_speed(motor5.target_speed);
 
 }
 

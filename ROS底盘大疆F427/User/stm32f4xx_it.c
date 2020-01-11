@@ -134,6 +134,8 @@ extern uint8_t flag_command_recieved;
 extern uint8_t flag_command_recieved1;
 extern uint8_t flag_command_recieved2;
 extern uint8_t flag_command_recieved3;
+extern uint8_t flag_command_recieved4;
+extern uint8_t flag_command_recieved5;
 
 
 
@@ -195,6 +197,32 @@ void JSON_USART_IRQHandler(void)
 			json_count=0;
 			//标志位置一，标识收到命令
 			flag_command_recieved3 = 1;
+			flag_json_recieve |= flag_json_stop; //结束标志置一
+			flag_json_recieve &= flag_json_start_mask;	//开始标志置零
+			//printf("%s",receiveBuffer);
+			memset(json_Buffer, 0, sizeof(json_Buffer));	//清空缓冲区，防止上一次的数据剩余导致乱码
+			strcpy(json_Buffer,receiveBuffer);	//接收缓冲区给json缓冲区
+			memset(receiveBuffer, 0, sizeof(receiveBuffer)); //清空接收缓冲区
+			
+		}
+		else if(ucTemp == '>')	//结束标志位
+		{
+			json_count=0;
+			//标志位置一，标识收到命令
+			flag_command_recieved4 = 1;
+			flag_json_recieve |= flag_json_stop; //结束标志置一
+			flag_json_recieve &= flag_json_start_mask;	//开始标志置零
+			//printf("%s",receiveBuffer);
+			memset(json_Buffer, 0, sizeof(json_Buffer));	//清空缓冲区，防止上一次的数据剩余导致乱码
+			strcpy(json_Buffer,receiveBuffer);	//接收缓冲区给json缓冲区
+			memset(receiveBuffer, 0, sizeof(receiveBuffer)); //清空接收缓冲区
+			
+		}//********************************************
+		else if(ucTemp == '<')	//结束标志位  
+		{
+			json_count=0;
+			//标志位置一，标识收到命令
+			flag_command_recieved5 = 1;
 			flag_json_recieve |= flag_json_stop; //结束标志置一
 			flag_json_recieve &= flag_json_start_mask;	//开始标志置零
 			//printf("%s",receiveBuffer);

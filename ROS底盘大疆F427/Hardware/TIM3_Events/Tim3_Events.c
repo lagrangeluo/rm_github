@@ -9,7 +9,7 @@
 #include "led.h"
 #include "bsp_debug_usart.h"
 #include "bsp_uart7.h"
-
+#include "fric.h"
 #include "motor.h"
 #include "kinematic.h"
 #include "remote_code.h"
@@ -39,8 +39,18 @@ void Robo_Move()
   if((Control_Mode) == 0x03)//((Control_Mode & auto_control) == auto_control)
 	{
 		speed_control(Kinematics.target_velocities.linear_x, Kinematics.target_velocities.linear_y, Kinematics.target_velocities.angular_z);
-		trigger_control(Kinematics.target_angular.trigger_angular);
-		//if(ap_pid_flag==pos_pid)
+		//trigger_control(Kinematics.target_angular.trigger_angular);
+		if(Kinematics.target_angular.fric_angular==1)
+		{   fric1_on(1800);
+				fric2_on(1800);
+			  trigger_control(400);
+		}
+		else if(Kinematics.target_angular.fric_angular==0)
+		{   
+			  fric1_on(1000);
+				fric2_on(1000);
+			  trigger_control(0);
+		}
 	}
 		vpid_PI_realize(2,0.05);			//速度闭环2  0.05
 		set_chassis_current();		//设定电机电流
@@ -48,9 +58,6 @@ void Robo_Move()
 		TIM_SetCompare1(TIM1,pwm_pulse1);
 		TIM_SetCompare2(TIM1,pwm_pulse2);
 
-	  
-		
-	  //set_gimbal_current();
 	  
 }
 union {float fvalue;char data[4];}tmp1;
